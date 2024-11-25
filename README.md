@@ -111,6 +111,6 @@ This project is licensed under the **MIT License**. See the [`LICENSE`](./LICENS
 
 Have questions? Feel free to reach out!  
 📧 Email: [sqlpygenius@gmail.com](mailto:sqlpygenius@gmail.com)  
-🌐 Website: [https://okaydoky.com](https://okaydoky.com)
+🌐 Website: [https://www.okaydoky.com](https://okaydoky.com)
 
 ---
