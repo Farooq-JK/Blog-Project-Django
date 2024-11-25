@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <!-- Heading for the page, centered at the top -->
+    <h1 class="text-center">Add a Comment</h1>
+    
+    <!-- Form to add a comment, submitting the data with a POST request -->
+    <form method="post" action="{% url 'add_comment' post_id=post.id %}">
+        {% csrf_token %} <!-- CSRF token for security to prevent cross-site request forgery -->
+        
+        <!-- Input field for the comment text -->
+        <div class="mb-3">
+            <label for="comment_text" class="form-label">Your Comment</label>
+            <textarea id="comment_text" name="comment_text" class="form-control" rows="4" required></textarea>
+            <!-- Text area where users can input their comment -->
+        </div>
+        
+        <!-- Submit button to post the comment -->
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    
+</div>
+{% endblock %}

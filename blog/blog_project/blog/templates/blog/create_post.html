@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <!-- Container to center the card both horizontally and vertically -->
+    
+    <div class="card shadow-lg p-4" style="width: 600px;">
+        <!-- Card that contains the form, with shadow for emphasis -->
+
+        <h2 class="card-title text-center mb-4">Create a New Post</h2>
+        
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %} <!-- CSRF token for form security -->
+            
+            <!-- Input field for post title -->
+            <div class="mb-3">
+                <label for="id_title" class="form-label">Title:</label>
+                <input type="text" name="title" class="form-control" id="id_title" required>
+            </div>
+            
+            <!-- Text area for post body -->
+            <div class="mb-3">
+                <label for="id_body" class="form-label">Body:</label>
+                <textarea name="body" class="form-control" id="id_body" rows="5" required></textarea>
+            </div>
+            
+            <!-- Input field for optional image upload -->
+            <div class="mb-3">
+                <label for="id_image" class="form-label">Image:</label>
+                <input type="file" name="image" class="form-control" id="id_image">
+            </div>
+            
+            <!-- Submit button to create the post -->
+            <button type="submit" class="btn btn-primary w-100 rounded-0">Create Post</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mb-4">
+    <!-- Title -->
+    <h2 class="mb-3">{{ post.title }}</h2>
+    <p class="text-muted">By {{ post.author }} on {{ post.created_at|date:"F j, Y" }}</p>
+</div>
+
+<!-- Centered Larger Image -->
+{% if post.image %}
+    <div class="text-center mb-4">
+        <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid rounded shadow-lg" style="width: 70%; max-width: 1200px; height: auto;">
+    </div>
+{% endif %}
+
+<!-- Justified Text -->
+<div class="mb-4" style="text-align: justify; font-size: 1.2rem; line-height: 1.8;">
+    <p>{{ post.body }}</p>
+</div>
+
+<!-- Action Buttons -->
+<div class="d-flex justify-content-center gap-3 mt-4">
+    {% if user == post.author %}
+        <a href="{% url 'edit_post' post.pk %}" class="btn btn-warning">Edit Post</a>
+        <form method="post" action="{% url 'delete_post' post.pk %}" style="display: inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete Post</button>
+        </form>
+    {% endif %}
+    <a href="{% url 'post_list' %}" class="btn btn-secondary">Back to Posts</a>
+</div>
+
+<hr>
+
+<!-- Comments Section -->
+<h3>Comments</h3>
+<ul class="list-group mb-4">
+    {% for comment in post.comments.all %}
+        <li class="list-group-item">
+            <strong>{{ comment.author }}</strong> 
+            <span class="text-muted small">on {{ comment.created_at|date:"F j, Y, g:i a" }}</span>
+            <p>{{ comment.text }}</p>
+        </li>
+    {% empty %}
+        <li class="list-group-item">No comments yet. Be the first to comment!</li>
+    {% endfor %}
+</ul>
+
+<!-- Leave a Comment -->
+{% if user.is_authenticated %}
+    <h4>Leave a Comment:</h4>
+    <form method="post" action="{% url 'add_comment' post.pk %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% else %}
+    <p><a href="{% url 'login' %}">Log in</a> to leave a comment.</p>
+{% endif %}
+{% endblock %}

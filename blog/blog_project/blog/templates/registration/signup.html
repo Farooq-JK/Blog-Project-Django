@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+    <!-- Container to center the sign-up card both vertically and horizontally -->
+
+    <div class="card shadow p-4" style="width: 60%;">
+        <!-- Card that contains the sign-up form, styled for visual appeal -->
+
+        <h2 class="text-center mb-4">Sign Up</h2> <!-- Header for the sign-up form -->
+
+        <form method="post">
+            {% csrf_token %} <!-- CSRF token for form security -->
+            {{ form.as_p }} <!-- Render form fields with paragraph formatting -->
+            
+            <button type="submit" class="btn btn-primary w-100 rounded">Sign Up</button> <!-- Submit button for the sign-up form -->
+        </form>
+    </div>
+</div>
+{% endblock %}
